@@ -1,11 +1,4 @@
 # coding:utf-8
-
-"""Views"""
-
-# Author: gabisurita -- <gabsurita@gmail.com>
-# License: GPL 3.0
-
-
 from cornice.resource import resource
 
 from unicampi import dac_parser
@@ -37,9 +30,6 @@ class ApiResource(object):
 
 @resource(path='/')
 class Hello(ApiResource):
-    def __init__(self, request):
-        self.request = request
-
     def get(self):
         return {'path': ENDPOINTS}
 
