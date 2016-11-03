@@ -1,7 +1,7 @@
 # coding:utf-8
 from cornice.resource import resource
 
-from unicampi import dac_parser
+from unicampi.dac_parser import DacParser
 
 ENDPOINTS = {
     'Institutos': {
@@ -26,6 +26,7 @@ ENDPOINTS = {
 class ApiResource(object):
     def __init__(self, request):
         self.request = request
+        self.parser = DacParser()
 
 
 @resource(path='/')
@@ -38,7 +39,7 @@ class Hello(ApiResource):
 class Institute(ApiResource):
     def __init__(self, request):
         super(Institute, self).__init__(request)
-        self.institute_list = dac_parser.get_institutes()
+        self.institute_list = self.parser.get_institutes()
 
     def collection_get(self):
         return self.institute_list
@@ -58,31 +59,31 @@ class Institute(ApiResource):
 class Subject(ApiResource):
     def collection_get(self):
         institute = self.request.matchdict['instituto'].upper()
-        return dac_parser.get_subjects(institute)
+        return self.parser.get_subjects(institute)
 
     def get(self):
         name = self.request.matchdict['sigla'].upper()
-        return dac_parser.get_subject(name)
+        return self.parser.get_subject(name)
 
 
 @resource(**ENDPOINTS['Oferecimentos'])
 class Offering(ApiResource):
     def __init__(self, request):
-        self.request = request
+        super(Offering, self).__init__(request)
         self.periodo = request.matchdict['periodo'].lower()
         self.ano, self.sem = self.periodo.split('s', 1)
 
     def collection_get(self):
         data = self.request.matchdict
-        return dac_parser.get_offerings(data['sigla'].upper(),
-                                        self.ano,
-                                        self.sem)
+        return self.parser.get_offerings(data['sigla'].upper(),
+                                         self.ano,
+                                         self.sem)
 
     def get(self):
         data = self.request.matchdict
-        self.offering = dac_parser.get_offering(data['sigla'].upper(),
-                                                data['turma'].upper(),
-                                                self.ano, self.sem)
+        self.offering = self.parser.get_offering(data['sigla'].upper(),
+                                                 data['turma'].upper(),
+                                                 self.ano, self.sem)
 
         self.enrollments = self.offering.pop('alunos', {})
 
@@ -91,11 +92,6 @@ class Offering(ApiResource):
 
 @resource(**ENDPOINTS['Matriculados'])
 class Enrollments(Offering):
-    def __init__(self, request):
-        self.request = request
-        self.periodo = request.matchdict['periodo'].lower()
-        self.ano, self.sem = self.periodo.split('s', 1)
-
     def get(self):
         super(Enrollments, self).get()
         return self.enrollments
