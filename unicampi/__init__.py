@@ -1,11 +1,6 @@
-"""Many Entry Point"""
-
-# Author: gabisurita -- <gabsurita@gmail.com>
-# License: GPL 3.0
-
 from pyramid.config import Configurator
 
-API_VERSION = '0.04'
+API_VERSION = '0.05'
 
 
 def main(global_config, **settings):

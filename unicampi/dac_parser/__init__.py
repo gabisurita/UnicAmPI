@@ -1,11 +1,4 @@
 # coding: utf-8
-
-"""DacParser Base Module"""
-
-# Author: gabisurita -- <gabsurita@gmail.com>
-# License: GPL 3.0
-
-
 from __future__ import unicode_literals, absolute_import
 
 import requests
