@@ -1,10 +1,12 @@
-"""Utils"""
+from __future__ import unicode_literals, division
 
-# Author: gabisurita -- <gabsurita@gmail.com>
-# License: GPL 3.0
+import datetime
 
 
-from __future__ import unicode_literals
+def get_current_semester():
+    today = datetime.date.today()
+    semester = today.month // 6 + 1
+    return today.year, semester
 
 
 class ContentFinder(object):
