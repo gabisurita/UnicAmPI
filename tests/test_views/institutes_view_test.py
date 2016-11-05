@@ -27,5 +27,10 @@ class InstituteViewTest(TestCase):
         data = response.json
         self.assertIsInstance(data, dict)
 
+    def test_get_lowercase(self):
+        response = self.app.get('/institutos/ic', status=200)
+        data = response.json
+        self.assertIsInstance(data, dict)
+
     def test_get_not_found(self):
         self.app.get('/institutos/ICdjjadij', status=404, expect_errors=True)

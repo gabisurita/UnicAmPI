@@ -38,10 +38,14 @@ class BaseResource(object):
 
     def __init__(self, request):
         self.request = request
+        self._process_request_params()
 
     @property
     def params(self):
         return self.request.matchdict
+
+    def _process_request_params(self):
+        pass
 
 
 class ModelResource(BaseResource):
@@ -76,31 +80,50 @@ class Hello(BaseResource):
 class Institute(ModelResource):
     repository = InstitutesRepository
 
+    def _process_request_params(self):
+        if 'id' in self.params:
+            self.params['id'] = self.params['id'].upper()
 
 @resource(**ENDPOINTS['Disciplinas'])
 class Courses(ModelResource):
     def repository(self):
         return (CoursesRepository()
-                .filter(institute=self.params.get('instituto')))
+                .filter(institute=self.params['instituto']))
 
 
 @resource(**ENDPOINTS['Oferecimentos'])
 class Offering(ModelResource):
+    def _process_request_params(self):
+        if 'periodo' in self.params:
+            self.params['periodo'] = self.params['periodo'].lower()
+
+        if 'disciplina' in self.params:
+            self.params['disciplina'] = self.params['disciplina'].upper()
+
     def repository(self):
-        year, term = self.params['periodo'].lower().split('s', 1)
-        course = self.params['disciplina'].upper()
+        year, term = self.params['periodo'].split('s', 1)
 
         return (OfferingsRepository()
-                .filter(year=year, term=term, course=course))
+                .filter(year=year, term=term,
+                        course=self.params['disciplina']))
 
 
 @resource(**ENDPOINTS['Matriculados'])
 class Enrollments(ModelResource):
+    def _process_request_params(self):
+        if 'periodo' in self.params:
+            self.params['periodo'] = self.params['periodo'].lower()
+
+        if 'disciplina' in self.params:
+            self.params['disciplina'] = self.params['disciplina'].upper()
+
+        if 'turma' in self.params:
+            self.params['turma'] = self.params['turma'].lower()
+
     def repository(self):
-        year, term = self.params['periodo'].lower().split('s', 1)
-        course = self.params['disciplina'].upper()
-        offering = self.params['turma'].lower()
+        year, term = self.params['periodo'].split('s', 1)
 
         return (EnrollmentsRepository()
-                .filter(year=year, term=term, course=course,
-                        offering=offering))
+                .filter(year=year, term=term,
+                        course=self.params['disciplina'],
+                        offering=self.params['turma']))
