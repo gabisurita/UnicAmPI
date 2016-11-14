@@ -113,6 +113,7 @@ class ActiveCoursesRepository(CrawlerRepository):
 
         ct = ContentFinder(soup.text)
         main_info = ct.split[3]
+
         code = main_info[:5]
         name = main_info[5:].strip()
 
@@ -171,9 +172,13 @@ class ActiveCoursesRepository(CrawlerRepository):
                                             offset=1, pos=i),
 
             # Data is "Reserva(Curso/Ano):  0010/--, 0041/--"
-            reservations = ct.find_by_content('Reserva', pos=i)
-            reservations = reservations.split(':')[1].strip()
-            reservations = reservations.split(', ')
+            try:
+                reservations = ct.find_by_content('Reserva', pos=i)
+                reservations = reservations.split(':')[1].strip()
+                reservations = reservations.split(', ')
+
+            except UnboundLocalError:
+                reservations = []
 
             classes.append({
                 'turma': class_id[0].split(':')[1].strip(),
@@ -219,6 +224,10 @@ class LecturesRepository(CrawlerRepository):
         with requests.Session() as s:
             token_page = s.get(urls.PUBLIC_MENU_URL)
             token = token_page.content[1839:1871].decode('ascii')
+
+            # XXX: Quick fix for special lectures
+            if id == '%':
+                id = '%25'
 
             page = s.get(urls.LECTURE_URL.format(id=id, token=token, **self.query))
 
