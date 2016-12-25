@@ -1,0 +1,374 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.5",
+        "title": "unicampi",
+        "description": "Uma API para os dados públicos da Unicamp."
+    },
+    "host": "gabsurita.pythonanywhere.com",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Lista algumas propriedades do servidor",
+                        "schema": {
+                            "$ref": "#/definitions/Server_info"
+                        }
+                    }
+                }
+            }
+        },
+        "/institutos": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Lista todos os institutos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Instituto"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/institutos/{instituto}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "instituto",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Sigla do instituto",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna os dados de um instituto.",
+                        "schema": {
+                            "$ref": "#/definitions/Instituto"
+                        }
+                    }
+                }
+            }
+        },
+        "/institutos/{instituto}/disciplinas": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "instituto",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Sigla do instituto",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de todas as disciplinas de um instituto",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DisciplinaResumida"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/disciplinas/{disciplina}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "disciplina",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Sigla da disciplina",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna os dados de uma disciplina",
+                        "schema": {
+                            "$ref": "#/definitions/Disciplina"
+                        }
+                    }
+                }
+            }
+        },
+        "/periodo/{periodo}/oferecimentos/{disciplina}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "periodo",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Periodo do oferecimento",
+                        "required": true
+                    },
+                    {
+                        "name": "disciplina",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Sigla da disciplina",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna a lista de de oferecimentos para uma disciplina",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/OferecimentoResumido"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/periodo/{periodo}/oferecimentos/{disciplina}/turma/{turma}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "periodo",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Periodo do oferecimento",
+                        "required": true
+                    },
+                    {
+                        "name": "disciplina",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Sigla da disciplina",
+                        "required": true
+                    },
+                    {
+                        "name": "turma",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Letra da turma",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna os dados de uma turma",
+                        "schema": {
+                            "$ref": "#/definitions/Oferecimento"
+                        }
+                    }
+                }
+            }
+        },
+        "/periodo/{periodo}/oferecimentos/{disciplina}/turma/{turma}/matriculados": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "periodo",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Periodo do oferecimento",
+                        "required": true
+                    },
+                    {
+                        "name": "disciplina",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Sigla da disciplina",
+                        "required": true
+                    },
+                    {
+                        "name": "turma",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Letra da turma",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna a lista de matriculados em uma turma",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Aluno"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/periodo/{periodo}/oferecimentos/{disciplina}/turma/{turma}/matriculados/{ra}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "periodo",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Periodo do oferecimento",
+                        "required": true
+                    },
+                    {
+                        "name": "disciplina",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Sigla da disciplina",
+                        "required": true
+                    },
+                    {
+                        "name": "turma",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Letra da turma",
+                        "required": true
+                    },
+                    {
+                        "name": "ra",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Numero do RA do aluno",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna a lista de matriculados em uma turma",
+                        "schema": {
+                            "$ref": "#/definitions/Aluno"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Server_info": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "object",
+                    "description": "Tipos de dados e seus endpoints"
+                }
+            }
+        },
+        "Instituto": {
+            "type": "object",
+            "properties": {
+                "sigla": {
+                    "type": "string"
+                },
+                "nome": {
+                    "type": "string"
+                }
+            }
+        },
+        "DisciplinaResumida": {
+            "type": "object",
+            "properties": {
+                "sigla": {
+                    "type": "string"
+                },
+                "nome": {
+                    "type": "string"
+                }
+            }
+        },
+        "Disciplina": {
+            "type": "object",
+            "properties": {
+                "sigla": {
+                    "type": "string"
+                },
+                "nome": {
+                    "type": "string"
+                },
+                "ementa": {
+                    "type": "string"
+                },
+                "créditos": {
+                    "type": "integer"
+                },
+                "pré-requisitos": {
+                    "type": "object",
+                    "description": "Lista de pré-requisitos para cada período"
+                }
+            }
+        },
+        "OferecimentoResumido": {
+            "type": "object",
+            "properties": {
+                "turma": {
+                    "type": "string"
+                },
+                "vagas": {
+                    "type": "integer"
+                },
+                "matriculados": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Oferecimento": {
+            "type": "object",
+            "properties": {
+                "ano": {
+                    "type": "string"
+                },
+                "semestre": {
+                    "type": "string"
+                },
+                "sigla": {
+                    "type": "string"
+                },
+                "turma": {
+                    "type": "string"
+                },
+                "vagas": {
+                    "type": "integer"
+                },
+                "matriculados": {
+                    "type": "integer"
+                },
+                "professor": {
+                    "type": "string"
+                }
+            }
+        },
+        "Aluno": {
+            "type": "object",
+            "properties": {
+                "ra": {
+                    "type": "string"
+                },
+                "nome": {
+                    "type": "string"
+                },
+                "typo": {
+                    "type": "string"
+                },
+                "curso": {
+                    "type": "string"
+                },
+                "modalidade": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

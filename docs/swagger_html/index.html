@@ -1,0 +1,772 @@
+<!doctype html>
+<html>
+  <head>
+    <title>unicampi</title>
+    <style type="text/css">
+      body { 
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+	display: none;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+    </style>
+  </head>
+  <body>
+  <h1>unicampi</h1>
+    <div class="app-desc">Uma API para os dados públicos da Unicamp.</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 0.0.5</div>
+    <div class="app-desc">BasePath:/</div>
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h2>Table of Contents </h2>
+  <div class="method-summary"></div>
+  <ol>
+  <li><a href="#disciplinasDisciplinaGet"><code><span class="http-method">get</span> /disciplinas/{disciplina}</code></a></li>
+  <li><a href="#institutosGet"><code><span class="http-method">get</span> /institutos</code></a></li>
+  <li><a href="#institutosInstitutoDisciplinasGet"><code><span class="http-method">get</span> /institutos/{instituto}/disciplinas</code></a></li>
+  <li><a href="#institutosInstitutoGet"><code><span class="http-method">get</span> /institutos/{instituto}</code></a></li>
+  <li><a href="#periodoPeriodoOferecimentosDisciplinaGet"><code><span class="http-method">get</span> /periodo/{periodo}/oferecimentos/{disciplina}</code></a></li>
+  <li><a href="#periodoPeriodoOferecimentosDisciplinaTurmaTurmaGet"><code><span class="http-method">get</span> /periodo/{periodo}/oferecimentos/{disciplina}/turma/{turma}</code></a></li>
+  <li><a href="#periodoPeriodoOferecimentosDisciplinaTurmaTurmaMatriculadosGet"><code><span class="http-method">get</span> /periodo/{periodo}/oferecimentos/{disciplina}/turma/{turma}/matriculados</code></a></li>
+  <li><a href="#periodoPeriodoOferecimentosDisciplinaTurmaTurmaMatriculadosRaGet"><code><span class="http-method">get</span> /periodo/{periodo}/oferecimentos/{disciplina}/turma/{turma}/matriculados/{ra}</code></a></li>
+  <li><a href="#rootGet"><code><span class="http-method">get</span> /</code></a></li>
+  </ol>
+
+  <div class="method"><a name="disciplinasDisciplinaGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /disciplinas/{disciplina}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">disciplinasDisciplinaGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">disciplina (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Sigla da disciplina </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Disciplina">Disciplina</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "sigla" : "aeiou",
+  "ementa" : "aeiou",
+  "nome" : "aeiou",
+  "pré-requisitos" : "{}",
+  "créditos" : ""
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Retorna os dados de uma disciplina
+        <a href="#Disciplina">Disciplina</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="institutosGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /institutos</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">institutosGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Instituto">Instituto</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "sigla" : "aeiou",
+  "nome" : "aeiou"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Lista todos os institutos
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="institutosInstitutoDisciplinasGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /institutos/{instituto}/disciplinas</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">institutosInstitutoDisciplinasGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">instituto (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Sigla do instituto </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#DisciplinaResumida">DisciplinaResumida</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "sigla" : "aeiou",
+  "nome" : "aeiou"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Lista de todas as disciplinas de um instituto
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="institutosInstitutoGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /institutos/{instituto}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">institutosInstitutoGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">instituto (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Sigla do instituto </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Instituto">Instituto</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "sigla" : "aeiou",
+  "nome" : "aeiou"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Retorna os dados de um instituto.
+        <a href="#Instituto">Instituto</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="periodoPeriodoOferecimentosDisciplinaGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /periodo/{periodo}/oferecimentos/{disciplina}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">periodoPeriodoOferecimentosDisciplinaGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">periodo (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Periodo do oferecimento </div><div class="param">disciplina (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Sigla da disciplina </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#OferecimentoResumido">OferecimentoResumido</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "vagas" : "",
+  "turma" : "aeiou",
+  "matriculados" : ""
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Retorna a lista de de oferecimentos para uma disciplina
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="periodoPeriodoOferecimentosDisciplinaTurmaTurmaGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /periodo/{periodo}/oferecimentos/{disciplina}/turma/{turma}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">periodoPeriodoOferecimentosDisciplinaTurmaTurmaGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">periodo (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Periodo do oferecimento </div><div class="param">disciplina (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Sigla da disciplina </div><div class="param">turma (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Letra da turma </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Oferecimento">Oferecimento</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "vagas" : "",
+  "professor" : "aeiou",
+  "ano" : "aeiou",
+  "sigla" : "aeiou",
+  "semestre" : "aeiou",
+  "turma" : "aeiou",
+  "matriculados" : ""
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Retorna os dados de uma turma
+        <a href="#Oferecimento">Oferecimento</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="periodoPeriodoOferecimentosDisciplinaTurmaTurmaMatriculadosGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /periodo/{periodo}/oferecimentos/{disciplina}/turma/{turma}/matriculados</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">periodoPeriodoOferecimentosDisciplinaTurmaTurmaMatriculadosGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">periodo (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Periodo do oferecimento </div><div class="param">disciplina (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Sigla da disciplina </div><div class="param">turma (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Letra da turma </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Aluno">Aluno</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "typo" : "aeiou",
+  "curso" : "aeiou",
+  "nome" : "aeiou",
+  "ra" : "aeiou",
+  "modalidade" : "aeiou"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Retorna a lista de matriculados em uma turma
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="periodoPeriodoOferecimentosDisciplinaTurmaTurmaMatriculadosRaGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /periodo/{periodo}/oferecimentos/{disciplina}/turma/{turma}/matriculados/{ra}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">periodoPeriodoOferecimentosDisciplinaTurmaTurmaMatriculadosRaGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">periodo (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Periodo do oferecimento </div><div class="param">disciplina (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Sigla da disciplina </div><div class="param">turma (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Letra da turma </div><div class="param">ra (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Numero do RA do aluno </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Aluno">Aluno</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "typo" : "aeiou",
+  "curso" : "aeiou",
+  "nome" : "aeiou",
+  "ra" : "aeiou",
+  "modalidade" : "aeiou"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Retorna a lista de matriculados em uma turma
+        <a href="#Aluno">Aluno</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="rootGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">rootGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Server_info">Server_info</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "path" : "{}"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Lista algumas propriedades do servidor
+        <a href="#Server_info">Server_info</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <div class="up"><a href="#__Models">Up</a></div>
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h2>Table of Contents</h2>
+  <ol>
+    <li><a href="#Aluno"><code>Aluno</code></a></li>
+    <li><a href="#Disciplina"><code>Disciplina</code></a></li>
+    <li><a href="#DisciplinaResumida"><code>DisciplinaResumida</code></a></li>
+    <li><a href="#Instituto"><code>Instituto</code></a></li>
+    <li><a href="#Oferecimento"><code>Oferecimento</code></a></li>
+    <li><a href="#OferecimentoResumido"><code>OferecimentoResumido</code></a></li>
+    <li><a href="#Server_info"><code>Server_info</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3 class="field-label"><a name="Aluno">Aluno</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">ra (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">nome (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">typo (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">curso (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">modalidade (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="Disciplina">Disciplina</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">sigla (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">nome (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">ementa (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">créditos (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">pré-requisitos (optional)</div><div class="param-desc"><span class="param-type"><a href="#object">Object</a></span> Lista de pré-requisitos para cada período </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="DisciplinaResumida">DisciplinaResumida</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">sigla (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">nome (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="Instituto">Instituto</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">sigla (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">nome (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="Oferecimento">Oferecimento</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">ano (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">semestre (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">sigla (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">turma (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">vagas (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">matriculados (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">professor (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="OferecimentoResumido">OferecimentoResumido</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">turma (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">vagas (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">matriculados (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="Server_info">Server_info</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">path (optional)</div><div class="param-desc"><span class="param-type"><a href="#object">Object</a></span> Tipos de dados e seus endpoints </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
